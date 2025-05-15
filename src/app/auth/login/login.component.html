@@ -1,0 +1,132 @@
+<div class="center-container bg-white">
+  <div class="flex min-h-screen">
+    <div class="flex flex-row w-full">
+      <!-- Sidebar -->
+      <div
+        class="hidden lg:flex flex-col justify-between bg-[#ffe85c] lg:p-8 xl:p-12 lg:max-w-sm xl:max-w-lg"
+      >
+        <div class="flex items-center justify-start space-x-3">
+          <span class="bg-black rounded-full w-8 h-8"></span>
+          <a href="#" class="font-medium text-xl">InnovaTube</a>
+        </div>
+        <div class="space-y-5">
+          <h1 class="lg:text-3xl xl:text-5xl xl:leading-snug font-extrabold">
+            Enter your account and discover new videos everyday
+          </h1>
+          <p class="text-lg">You do not have an account?</p>
+          <button
+            class="inline-block flex-none px-4 py-3 border-2 rounded-lg font-medium border-black bg-black text-white"
+          >
+            <a href="/register">Create account here</a>
+          </button>
+        </div>
+        <p class="font-medium">© 2025 InnovaTube</p>
+      </div>
+
+      <div
+        class="flex flex-1 flex-col items-center justify-center px-10 relative"
+      >
+        <div class="flex lg:hidden justify-between items-center w-full py-4">
+          <div class="flex items-center justify-start space-x-3">
+            <span class="bg-black rounded-full w-6 h-6"></span>
+            <a href="/register" class="font-medium text-lg">InnovaTube</a>
+          </div>
+          <div class="flex items-center space-x-2">
+            <span>Not a member? </span>
+            <a href="/register" class="underline font-medium text-[#070eff]">
+              Sign up now
+            </a>
+          </div>
+        </div>
+
+        <div class="flex flex-1 flex-col justify-center space-y-5 max-w-md">
+          <div class="flex flex-col space-y-2 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold">Sign in to account</h2>
+          </div>
+          <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="container flex flex-col max-w-md space-y-5">
+              <mat-form-field class="example-full-width">
+                <mat-label>Email</mat-label>
+                <input
+                  matInput
+                  class="flex px-3 py-2 md:px-4 md:py-3 border-2 border-black rounded-lg font-medium placeholder:font-normal"
+                  placeholder="Email"
+                  formControlName="email"
+                />
+              </mat-form-field>
+
+              <mat-form-field class="example-full-width">
+                <mat-label>Password</mat-label>
+                <input
+                  matInput
+                  [type]="'Password'"
+                  class="flex px-3 py-2 md:px-4 md:py-3 border-2 border-black rounded-lg font-medium placeholder:font-normal"
+                  formControlName="password"
+                />
+              </mat-form-field>
+
+              <div class="example-button-row flex flex-col max-w-md space-y-5">
+                <button
+                  class="flex items-center justify-center flex-none px-3 py-2 md:px-4 md:py-3 border-2 rounded-lg font-medium border-black bg-black text-white"
+                  type="submit"
+                >
+                  Log In
+                </button>
+              </div>
+            </div>
+          </form>
+
+          <!-- <a href="/register"> You don't have a account? Register</a> -->
+        </div>
+        <!-- Footer -->
+        <div
+          class="flex justify-center flex-col m-auto mb-16 text-center text-lg "
+        >
+          <p class="font-bold mb-1 dark:text-black">
+            Built by
+            <a href="#" class="underline dark:text-black">Alejandro Gómez</a>
+          </p>
+          <p>Contact me on the different platforms and social networks</p>
+          <div
+            class="flex items-center justify-center space-x-2 mt-4 flex-wrap"
+          >
+            <a
+              href="https://www.linkedin.com/in/alejandro-g%C3%B3mez-llano-a51299268/"
+              class="flex flex-none items-center justify-center rounded-full w-12 h-12 hover:bg-slate-200 transition-all dark:hover:bg-slate-700"
+              ><svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <circle
+                  cx="4.983"
+                  cy="5.009"
+                  r="2.188"
+                  fill="currentColor"
+                ></circle>
+                <path
+                  d="M9.237 8.855v12.139h3.769v-6.003c0-1.584.298-3.118 2.262-3.118 1.937 0 1.961 1.811 1.961 3.218v5.904H21v-6.657c0-3.27-.704-5.783-4.526-5.783-1.835 0-3.065 1.007-3.568 1.96h-.051v-1.66H9.237zm-6.142 0H6.87v12.139H3.095z"
+                  fill="currentColor"
+                ></path></svg>
+              </a>
+              <a
+                  href="https://github.com/frankuxui"
+                  class="flex flex-none items-center justify-center rounded-full w-12 h-12 hover:bg-slate-200 transition-all dark:hover:bg-slate-700"
+                  ><svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M12,2A10,10 0 0,0 2,12C2,16.42 4.87,20.17 8.84,21.5C9.34,21.58 9.5,21.27 9.5,21C9.5,20.77 9.5,20.14 9.5,19.31C6.73,19.91 6.14,17.97 6.14,17.97C5.68,16.81 5.03,16.5 5.03,16.5C4.12,15.88 5.1,15.9 5.1,15.9C6.1,15.97 6.63,16.93 6.63,16.93C7.5,18.45 8.97,18 9.54,17.76C9.63,17.11 9.89,16.67 10.17,16.42C7.95,16.17 5.62,15.31 5.62,11.5C5.62,10.39 6,9.5 6.65,8.79C6.55,8.54 6.2,7.5 6.75,6.15C6.75,6.15 7.59,5.88 9.5,7.17C10.29,6.95 11.15,6.84 12,6.84C12.85,6.84 13.71,6.95 14.5,7.17C16.41,5.88 17.25,6.15 17.25,6.15C17.8,7.5 17.45,8.54 17.35,8.79C18,9.5 18.38,10.39 18.38,11.5C18.38,15.32 16.04,16.16 13.81,16.41C14.17,16.72 14.5,17.33 14.5,18.26C14.5,19.6 14.5,20.68 14.5,21C14.5,21.27 14.66,21.59 15.17,21.5C19.14,20.16 22,16.42 22,12A10,10 0 0,0 12,2Z"
+                      fill="currentColor"
+                    ></path></svg></a
+                >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

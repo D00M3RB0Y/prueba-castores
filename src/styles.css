@@ -1,1 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
+@import "tailwindcss";
+@font-face {
+    font-family: Roboto;
+    src: url("./assets/Roboto-Italic-VariableFont_wdth\,wght.ttf") format("truetype"),
+    url("./assets/Roboto-VariableFont_wdth\,wght.ttf") format("truetype")
+}
+html, body { font-family: 'Roboto', sans-serif;}
+body { font-family: Roboto, "Helvetica Neue", sans-serif; }
