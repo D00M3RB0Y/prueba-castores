@@ -1,35 +1,75 @@
-import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms'
+import { FormsModule } from '@angular/forms'; 
+import { ToastrService } from 'ngx-toastr';
+
+import { UserService } from '../../services/user.service';
 import { User } from '../../interfaces/user';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input'; 
-import { MatButtonModule } from '@angular/material/button'; 
+import { HttpErrorResponse } from '@angular/common/http';
+
+  
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [ReactiveFormsModule, MatFormFieldModule, MatInputModule,MatButtonModule],
+  imports: [FormsModule],
   templateUrl: './register.component.html',
-  styleUrl: './register.component.css'
+  styleUrl: './register.component.css',
 })
-export class RegisterComponent {
-  authService = inject(AuthService);
-  router = inject(Router);
+export class RegisterComponent implements OnInit {
+  username: string = '';
+  name: string = '';
+  lastname: string = '';
+  email: string = '';
+  password: string = '';
+  repeatPassword: string = '';
 
-  form = new FormGroup({
-    email: new FormControl('', [Validators.required]),
-    password: new FormControl('', [Validators.required])
-  })
+  constructor(
+    private toast: ToastrService, 
+    private _userService: UserService,
+    private router: Router
+  ) {}
 
-  onSubmit(){
-    if(this.form.valid){
-      this.authService.register(this.form.value as User)
-      .then(resp => {
-        this.router.navigate(['/login']);
-      })
+  ngOnInit(): void {}
+
+  addUser() {
+    if (
+      this.username == '' ||
+      this.name == '' ||
+      this.lastname == '' ||
+      this.email == '' ||
+      this.password == '' ||
+      this.repeatPassword == ''
+    ) {
+      this.toast.error("The fields are empty", "Error")
+      return
     }
+    if(this.password != this.repeatPassword){
+      this.toast.warning("The passwords do not match.", "Warning")
+      return
+    }
+
+    const user: User = {
+      username: this.username,
+      name: this.name,
+      lastname: this.lastname,
+      email: this.email,
+      password: this.password
+    }
+
+    console.log(user)
+
+    this._userService.signIn(user).subscribe(data =>{
+      this.toast.success(`${this.name} ${this.lastname} Successfully created.`)
+      this.router.navigate(['/login'])
+
+    }, (event: HttpErrorResponse)=>{
+      if(event.error.msg){
+        console.log(event.error.msg)
+        this.toast.warning(event.error.msg, "Error")
+      }else{
+        this.toast.error("Server error", "Error")
+      }
+    })
   }
 }

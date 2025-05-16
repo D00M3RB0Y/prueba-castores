@@ -15,24 +15,23 @@ import {
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { getDatabase, provideDatabase } from '@angular/fire/database';
 import { HttpClientModule } from '@angular/common/http';
-import {AngularFireModule} from '@angular/fire/compat'
-import {AngularFirestoreModule} from '@angular/fire/compat/firestore'
-
-
-const firebaseConfig = {
-  projectId: 'prueba-castores',
-  appId: '1:1061583479803:web:8634b146bd1a271454a15e',
-  storageBucket: 'prueba-castores.firebasestorage.app',
-  apiKey: 'AIzaSyDi4Gt9rcGMQZHLf4YxsJ59ENAOcleE04s',
-  authDomain: 'prueba-castores.firebaseapp.com',
-  messagingSenderId: '1061583479803',
-  measurementId: 'G-02T6G0W6K4',
-};
-initializeApp(firebaseConfig);
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { provideAnimations } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
+    provideAnimations(), // Agrega provideAnimations
+    importProvidersFrom(
+      HttpClientModule,
+      ToastrModule.forRoot({
+        timeOut: 10000,
+        positionClass: 'toast-top-right',
+        preventDuplicates: true,
+      })
+    ), // Agrega importProvidersFrom para ToastrModule
     provideAppCheck(() => {
       // TODO get a reCAPTCHA Enterprise here https://console.cloud.google.com/security/recaptcha?project=_
       const provider = new ReCaptchaEnterpriseProvider(
@@ -43,8 +42,5 @@ export const appConfig: ApplicationConfig = {
         isTokenAutoRefreshEnabled: true,
       });
     }),
-    provideFirestore(() => getFirestore()),
-    provideDatabase(() => getDatabase()),
-    importProvidersFrom(HttpClientModule, AngularFireModule.initializeApp(firebaseConfig), AngularFirestoreModule),
   ],
 };

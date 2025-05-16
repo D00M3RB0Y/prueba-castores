@@ -1,17 +1,138 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
-  <div class="container">
-    <mat-form-field class="example-full-width">
-      <mat-label>Email</mat-label>
-      <input matInput placeholder="email" formControlName="email">
-    </mat-form-field>
+<div class="center-container bg-white">
+  <div class="flex min-h-screen">
+    <div class="flex flex-row w-full">
+      <!-- Sidebar -->
+      <div
+        class="hidden lg:flex flex-col justify-between bg-[#ffe85c] lg:p-8 xl:p-12 lg:max-w-sm xl:max-w-lg"
+      >
+        <div class="flex items-center justify-start space-x-3">
+          <span class="bg-black rounded-full w-8 h-8"></span>
+          <a href="#" class="font-medium text-xl">InnovaTube</a>
+        </div>
+        <div class="space-y-5">
+          <h1 class="lg:text-3xl xl:text-5xl xl:leading-snug font-extrabold">
+            Enter your account and discover new videos everyday
+          </h1>
+          <p class="text-lg">Already have an account?</p>
+          <button
+            class="inline-block flex-none px-4 py-3 border-2 rounded-lg font-medium border-black bg-black text-white"
+          >
+            <a href="/login">Log In here</a>
+          </button>
+        </div>
+        <p class="font-medium">© 2025 InnovaTube</p>
+      </div>
 
-    <mat-form-field class="example-full-width">
-      <mat-label>Password</mat-label>
-      <input matInput [type]="'password'" formControlName="password">
-    </mat-form-field>
+      <div
+        class="flex flex-1 flex-col items-center justify-center px-10 relative"
+      >
+        <div class="flex lg:hidden justify-between items-center w-full py-4">
+          <div class="flex items-center justify-start space-x-3">
+            <span class="bg-black rounded-full w-6 h-6"></span>
+            <a href="/register" class="font-medium text-lg">InnovaTube</a>
+          </div>
+          <div class="flex items-center space-x-2">
+            <span>Already a member? </span>
+            <a href="/login" class="underline font-medium text-[#070eff]">
+              Sign in here
+            </a>
+          </div>
+        </div>
 
-    <div class="button-container"> <button mat-flat-button type="submit">Register</button>
+        <div class="flex flex-1 flex-col justify-center space-y-5 max-w-md">
+          <div class="flex flex-col space-y-2 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold">
+              Create your account now!
+            </h2>
+          </div>
+
+          <div action="">
+            <div class="container flex flex-col max-w-md space-y-5">
+              <!-- <mat-form-field class="example-full-width">
+                <mat-label>Username</mat-label> -->
+              <input
+                name="username"
+                [(ngModel)]="username"
+                [ngModelOptions]="{ standalone: true }"
+                id="floatingUsername"
+                class="flex px-3 py-2 md:px-4 md:py-3 border-2 border-black rounded-lg font-medium placeholder:font-normal"
+                placeholder="Username"
+                type="text"
+              />
+              <!-- </mat-form-field> -->
+              <!-- <mat-form-field class="example-full-width">
+                <mat-label>Name</mat-label> -->
+              <input
+                name="name"
+                [(ngModel)]="name"
+                [ngModelOptions]="{ standalone: true }"
+                id="floatingName"
+                class="flex px-3 py-2 md:px-4 md:py-3 border-2 border-black rounded-lg font-medium placeholder:font-normal"
+                placeholder="Name"
+                type="text"
+              />
+              <!-- </mat-form-field>
+              <mat-form-field class="example-full-width">
+                <mat-label>Lastname</mat-label> -->
+              <input
+                name="lastname"
+                [(ngModel)]="lastname"
+                [ngModelOptions]="{ standalone: true }"
+                id="floatingLastName"
+                class="flex px-3 py-2 md:px-4 md:py-3 border-2 border-black rounded-lg font-medium placeholder:font-normal"
+                placeholder="Lastname"
+                type="text"
+              />
+              <!-- </mat-form-field>
+              <mat-form-field class="example-full-width">
+                <mat-label>Email</mat-label> -->
+              <input
+                name="email"
+                id="floatingInput"
+                class="flex px-3 py-2 md:px-4 md:py-3 border-2 border-black rounded-lg font-medium placeholder:font-normal"
+                placeholder="Email"
+                [(ngModel)]="email"
+                [ngModelOptions]="{ standalone: true }"
+                type="text"
+              />
+              <!-- </mat-form-field>
+
+              <mat-form-field class="example-full-width">
+                <mat-label>Password</mat-label> -->
+              <input
+                name="password"
+                id="floatingPassword"
+                type="password"
+                class="flex px-3 py-2 md:px-4 md:py-3 border-2 border-black rounded-lg font-medium placeholder:font-normal"
+                [(ngModel)]="password"
+                [ngModelOptions]="{ standalone: true }"
+                placeholder="Password"
+              />
+              <!-- </mat-form-field> -->
+
+              <input
+                name="repeatPassword"
+                id="floatingrepeatPassword"
+                type="password"
+                class="flex px-3 py-2 md:px-4 md:py-3 border-2 border-black rounded-lg font-medium placeholder:font-normal"
+                [(ngModel)]="repeatPassword"
+                [ngModelOptions]="{ standalone: true }"
+                placeholder="Confirm Password"
+              />
+
+              <div class="example-button-row flex flex-col max-w-md space-y-5">
+                <button
+                  class="flex items-center justify-center flex-none px-3 py-2 md:px-4 md:py-3 border-2 rounded-lg font-medium border-black bg-black text-white"
+                  (click)="addUser()"
+                  type="button"
+                >
+                  Sign Up
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-</form>
-
+</div>
