@@ -1,0 +1,83 @@
+<div class="bg-gray-100 min-h-screen overflow-y-auto py-8">
+  <div class="container mx-auto px-4 min-h-full">
+    <h1 class="text-3xl font-bold text-intube-red mb-6 text-center">
+      Buscar Videos de InTube
+    </h1>
+
+    <div class="flex items-center mb-6 max-w-lg mx-auto">
+      <input
+        type="text"
+        [(ngModel)]="searchQuery"
+        placeholder="Ingresa tu búsqueda..."
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+      />
+      <button
+        (click)="searchVideos()"
+        class="bg-intube-red bg-red-700 hover:bg-black text-white font-bold py-2 px-4 ml-2 rounded focus:outline-none focus:shadow-outline"
+      >
+        Buscar
+      </button>
+    </div>
+
+    <div *ngIf="loading" class="text-center text-gray-600 py-4">
+      Cargando videos...
+    </div>
+    <div *ngIf="errorMessage" class="text-center text-red-500 py-4">
+      {{ errorMessage }}
+    </div>
+
+    <div class="mt-8" *ngIf="searchResults.length > 0">
+      <div
+        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-h-[80vh] overflow-y-auto"
+      >
+        <div
+          *ngFor="let video of searchResults"
+          class="bg-white rounded-lg shadow-md overflow-hidden"
+        >
+          <div class="aspect-w-16 aspect-h-9">
+            <img
+              [src]="video.thumbnail"
+              [alt]="video.title"
+              class="object-cover w-full h-full"
+            />
+          </div>
+          <div class="p-4">
+            <h2 class="text-lg font-semibold text-gray-800 mb-2 line-clamp-2">
+              {{ video.title }}
+            </h2>
+            <p class="text-gray-700 text-sm mb-2 line-clamp-3">
+              {{ video.description }}
+            </p>
+            <p class="text-gray-500 text-xs">
+              Publicado: {{ video.publishedAt | date }}
+            </p>
+          </div>
+          <button
+            (click)="addToFavorites(video)"
+            class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-2"
+          >
+          <mat-icon>star</mat-icon>
+          </button>
+        </div>
+      </div>
+
+      <div class="flex justify-center mt-6">
+        <button
+          (click)="goToPreviousPage()"
+          [disabled]="currentPage === 1"
+          class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l"
+        >
+          Anterior
+        </button>
+        <span class="mx-2 text-gray-700">Página {{ currentPage }}</span>
+        <button
+          (click)="goToNextPage()"
+          [disabled]="!nextPageToken"
+          class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-r"
+        >
+          Siguiente
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

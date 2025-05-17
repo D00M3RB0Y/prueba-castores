@@ -19,5 +19,10 @@ export const routes: Routes = [
   {
     path: 'login',  
     loadComponent: () => import('./auth/login/login.component').then(m => m.LoginComponent),
-  }
+  },
+  {
+    path: 'favoritos',
+    canActivate: [authGuard],
+    loadComponent: () => import('./listFav/list-fav.component').then(m => m.ListFavComponent),
+  },
 ];

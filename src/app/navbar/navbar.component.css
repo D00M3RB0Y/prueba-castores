@@ -1,0 +1,26 @@
+.spacer {
+  flex: 1 1 auto;
+}
+
+.menu-container {
+  display: flex;
+  align-items: center; /* Alinea verticalmente los menús */
+}
+
+.desktop-menu {
+  display: none; /* Oculto por defecto en pantallas pequeñas */
+}
+
+.mobile-menu {
+  display: flex; /* Visible por defecto en pantallas pequeñas */
+}
+
+@media (min-width: 768px) {
+  .desktop-menu {
+    display: flex; /* Visible en pantallas medianas y grandes */
+    align-items: center;
+  }
+  .mobile-menu {
+    display: none; /* Oculto en pantallas medianas y grandes */
+  }
+}

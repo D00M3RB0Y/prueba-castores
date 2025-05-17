@@ -1,13 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormsModule } from '@angular/forms'; 
+import { FormsModule } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-
 import { UserService } from '../../services/user.service';
 import { User } from '../../interfaces/user';
 import { HttpErrorResponse } from '@angular/common/http';
-
-  
+import { ErrorsService } from '../../services/errors.service';
 
 @Component({
   selector: 'app-register',
@@ -25,9 +23,10 @@ export class RegisterComponent implements OnInit {
   repeatPassword: string = '';
 
   constructor(
-    private toast: ToastrService, 
+    private toast: ToastrService,
     private _userService: UserService,
-    private router: Router
+    private router: Router,
+    private _errorService: ErrorsService
   ) {}
 
   ngOnInit(): void {}
@@ -41,12 +40,12 @@ export class RegisterComponent implements OnInit {
       this.password == '' ||
       this.repeatPassword == ''
     ) {
-      this.toast.error("The fields are empty", "Error")
-      return
+      this.toast.error('The fields are empty', 'Error');
+      return;
     }
-    if(this.password != this.repeatPassword){
-      this.toast.warning("The passwords do not match.", "Warning")
-      return
+    if (this.password != this.repeatPassword) {
+      this.toast.warning('The passwords do not match.', 'Warning');
+      return;
     }
 
     const user: User = {
@@ -54,22 +53,27 @@ export class RegisterComponent implements OnInit {
       name: this.name,
       lastname: this.lastname,
       email: this.email,
-      password: this.password
-    }
+      password: this.password,
+    };
 
-    console.log(user)
+    console.log(user);
 
-    this._userService.signIn(user).subscribe(data =>{
-      this.toast.success(`${this.name} ${this.lastname} Successfully created.`)
-      this.router.navigate(['/login'])
+    this._userService.signIn(user).subscribe({
+      next: (v) => {
+        this.toast.success(
+          `${this.name} ${this.lastname} Successfully created.`
+        );
+        this.router.navigate(['/login']);
+      },
+      error: (e: HttpErrorResponse) => {
+        this._errorService.messageError(e)
+      },
+      complete: () => console.log('complete'),
+    });
 
-    }, (event: HttpErrorResponse)=>{
-      if(event.error.msg){
-        console.log(event.error.msg)
-        this.toast.warning(event.error.msg, "Error")
-      }else{
-        this.toast.error("Server error", "Error")
-      }
-    })
+    // this._userService.signIn(user).subscribe(
+    //   (data) => {},
+    //   (event: HttpErrorResponse) => {}
+    // );
   }
 }

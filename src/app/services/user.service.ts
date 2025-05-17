@@ -14,10 +14,14 @@ export class UserService {
 
   constructor(private http: HttpClient) {
     this.AppUrl = environment.apiUrl
-    this.ApiUrl = 'api/user/register'
+    this.ApiUrl = 'api/user'
    }
 
    signIn(user:User): Observable<any>{
-    return this.http.post(`${this.AppUrl}${this.ApiUrl}`, user)
+    return this.http.post(`${this.AppUrl}${this.ApiUrl}/register`, user)
+   }
+
+   logIn(user:User): Observable<string>{
+    return this.http.post<string>(`${this.AppUrl}${this.ApiUrl}/login`, user)
    }
 }

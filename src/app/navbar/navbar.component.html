@@ -1,1 +1,41 @@
-<p>navbar works!</p>
+<mat-toolbar color="primary">
+  <a href="/dashboard"><mat-icon style="border-radius: 12px;background-color: #f44336;">play_arrow</mat-icon><span>Intube</span></a>
+  <span class="spacer"></span>
+  <div class="menu-container">
+    <div class="desktop-menu">
+      <button mat-button [matMenuTriggerFor]="userMenu">
+        <mat-icon>account_circle</mat-icon>
+        <span *ngIf="username">Bienvenido, {{ username }}</span>
+      </button>
+      <mat-menu #userMenu="matMenu">
+        <button mat-button (click)="logout()">
+          <mat-icon>logout</mat-icon>
+          <span>Log Out</span>
+        </button>
+        <a href="/favoritos">
+          <button mat-button>
+            <mat-icon>star</mat-icon>
+            <span>Favorites</span>
+          </button>
+        </a>
+      </mat-menu>
+    </div>
+    <div class="mobile-menu">
+      <button mat-icon-button [matMenuTriggerFor]="mobileMenu">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <mat-menu #mobileMenu="matMenu">
+        <button mat-button (click)="logout()">
+          <mat-icon>logout</mat-icon>
+          <span>Log Out</span>
+        </button>
+        <a href="/favoritos">
+          <button mat-button>
+            <mat-icon>star</mat-icon>
+            <span>Favorites</span>
+          </button>
+        </a>
+      </mat-menu>
+    </div>
+  </div>
+</mat-toolbar>
